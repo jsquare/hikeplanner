@@ -1,0 +1,10 @@
+<html>
+Here are all your matching hikes:
+
+<ul>
+{% for hike in hike_list %}
+    <li>{{ hike.name }}</li>
+{% endfor %}
+</ul>
+
+</html>

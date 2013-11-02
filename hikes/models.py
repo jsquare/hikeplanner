@@ -12,6 +12,8 @@ class Hike(models.Model):
     
     difficulty = models.IntegerField(choices=DIFFICULTY_CHOICES)
 
+    days = models.IntegerField()
+
     def __unicode__(self):
         return self.name
 
