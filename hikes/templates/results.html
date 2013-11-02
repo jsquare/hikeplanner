@@ -2,10 +2,8 @@
 {% block content %}
 Here are all your matching hikes:
 
-<ul>
 {% for hike in hike_list %}
-    <li>{{ hike.name }}</li>
+    <div class="hike-result">{{ hike.name }}: {{ hike.get_difficulty_display }}; {{ hike.days }} days</div>
 {% endfor %}
-</ul>
 
 {% endblock %}

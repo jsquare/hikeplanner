@@ -2,6 +2,7 @@
 <html>
 <head>
     {% load static from staticfiles %}
+    <link href="{% static 'css/site.css' %}" rel="stylesheet">
     <link href="{% static 'css/ui-theme/jquery-ui-1.10.3.custom.css' %}" rel="stylesheet">
     <script src="{% static 'js/jquery-1.9.1.js' %}"></script>
     <script src="{% static 'js/jquery-ui-1.10.3.custom.js' %}"></script>
@@ -9,7 +10,11 @@
     {% endblock %}
 </head>
 <body>
-{% block content %}
-{% endblock %}
+<div id='header'>
+    <h1>Hike Planner</h1>
+</div>
+<div id='content'>
+    {% block content %}{% endblock %}
+</div>
 </body>
 </html>
