@@ -1,6 +1,6 @@
 {% extends 'site_base.html' %}
 {% block content %}
-Here are all your matching hikes:
+<h2>Matching hikes:</h2>
 
 {% for hike in hike_list %}
     <div class="hike-result">{{ hike.name }}: {{ hike.get_difficulty_display }}; {{ hike.days }} days</div>

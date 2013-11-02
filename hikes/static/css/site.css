@@ -1,8 +1,14 @@
 body {
     background-image: url('/static/img/background.jpg');
+    background-color: slategrey;
     background-size: 100%;
     background-repeat: no-repeat;
     font-family: Tw Cen MT, Trebuchet MS, sans serif;
+}
+
+#header, #content {
+    box-shadow: 0px 0px 20px 3px #d3d3d3;
+    border: 1px solid green;
 }
 
 #header {
@@ -15,8 +21,10 @@ body {
     border-radius: 10px;
 }
 
-h1 {
-    margin: 0px;
+h1, h2 {
+    margin: 5px 5px 5px 10px;
+    color: darkgreen;
+    font-weight: normal;
 }
 
 #content {
@@ -27,6 +35,6 @@ h1 {
 }
 
 .hike-result {
-    width: 100%;
+    padding: 10px;
     border-top: 1px dashed green;
 }
