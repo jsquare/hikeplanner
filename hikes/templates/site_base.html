@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static from staticfiles %}
+    <link href="{% static 'css/ui-theme/jquery-ui-1.10.3.custom.css' %}" rel="stylesheet">
+    <script src="{% static 'js/jquery-1.9.1.js' %}"></script>
+    <script src="{% static 'js/jquery-ui-1.10.3.custom.js' %}"></script>
+    {% block extra-head %}
+    {% endblock %}
+</head>
+<body>
+{% block content %}
+{% endblock %}
+</body>
+</html>
