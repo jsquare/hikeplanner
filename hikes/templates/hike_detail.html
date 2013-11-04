@@ -1,0 +1,8 @@
+{% extends 'site_base.html' %}
+{% block content %}
+<h2>{{ hike.name }}</h2>
+
+<p>Difficulty: {{ hike.get_difficulty_display }}</p>
+<p>Length: {{ hike.days }} day{% if hike.days > 1 %}s{% endif %}</p>
+
+{% endblock %}

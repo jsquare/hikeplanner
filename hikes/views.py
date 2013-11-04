@@ -1,4 +1,4 @@
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
 from hikes.models import Hike
 from django.shortcuts import render_to_response
 from django import forms
@@ -49,6 +49,15 @@ def results(request):
     
     return render_to_response('results.html', context)
 
+def hike_detail(request, hike_id):
+    try:
+        hike = Hike.objects.get(id=hike_id)
+    except Hike.DoesNotExist:
+        return HttpResponseNotFound() # TODO
 
+    context = {
+        'hike': hike
+    }
+    return render_to_response('hike_detail.html', context)
 
 
