@@ -42,7 +42,8 @@ def results(request):
     hike_list = Hike.objects.filter(days__gte=min_days, days__lte=max_days)
     
     context = {
-        'hike_list' : hike_list
+        'hike_list' : hike_list,
+        'page_title' : 'Hike Results'
     }
 
     hike_str = "Here are all the hikes within your limits: {}".format([hike.__unicode__() for hike in hike_list])
@@ -60,7 +61,8 @@ def hike_detail(request, hike_id, slug=''):
         return HttpResponseNotFound() # TODO
 
     context = {
-        'hike': hike
+        'hike': hike,
+        'page_title': hike.name,
     }
     return render_to_response('hike_detail.html', context)
 
