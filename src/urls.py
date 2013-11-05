@@ -9,7 +9,8 @@ urlpatterns = patterns('',
     # Examples:
     url(r'^$', home, name='home'),
     url(r'^results/$', results, name='results'),
-    url(r'^hike/(?P<hike_id>\d+)$', hike_detail, name='hike-detail'),
+    url(r'^hike/(?P<hike_id>\d+)/$', hike_detail, name='hike-detail'),
+    url(r'^hike/(?P<hike_id>\d+)/(?P<slug>[-\w]+)/$', hike_detail, name='hike-detail'),
     # url(r'^hikeplanner/', include('hikeplanner.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:

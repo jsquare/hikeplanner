@@ -49,7 +49,11 @@ def results(request):
     
     return render_to_response('results.html', context)
 
-def hike_detail(request, hike_id):
+def hike_detail(request, hike_id, slug=''):
+    '''
+    The general information page about a hike.
+    @param slug: optional, ignored (allows StackOverflow-style URL)
+    '''
     try:
         hike = Hike.objects.get(id=hike_id)
     except Hike.DoesNotExist:

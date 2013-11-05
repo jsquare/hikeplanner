@@ -4,7 +4,7 @@
 
 {% for hike in hike_list %}
     <div class="hike-result">
-        <a href="{% url 'hike-detail' hike.id %}">{{ hike.name }}</a>: {{ hike.get_difficulty_display }}; {{ hike.days }} days
+        <a href="{{ hike.get_absolute_url }}">{{ hike.name }}</a>: {{ hike.get_difficulty_display }}; {{ hike.days }} days
     </div>
 {% endfor %}
 
