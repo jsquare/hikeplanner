@@ -1,7 +1,7 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from hikes.models import Hike
 from django.shortcuts import render_to_response
-from django import forms
+from django.contrib.gis import forms
 from django.core.urlresolvers import reverse
 from urllib import urlencode
 
