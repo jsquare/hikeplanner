@@ -1,12 +1,12 @@
+from django.contrib.gis.db import models
 from django.core.urlresolvers import reverse
-from django.db import models
 from django.template.defaultfilters import slugify
 
 # Create your models here.
 
 class Hike(models.Model):
     name = models.CharField(max_length=100)
-    
+
     DIFFICULTY_CHOICES = [
         (1, 'easy'),
         (2, 'hard')
@@ -15,6 +15,12 @@ class Hike(models.Model):
     difficulty = models.IntegerField(choices=DIFFICULTY_CHOICES)
 
     days = models.IntegerField()
+
+    location = models.PointField()
+
+    # Override default manager with GeoManager instance
+
+    objects = models.GeoManager()
 
     def get_absolute_url(self):
         slug = slugify(self.name)
