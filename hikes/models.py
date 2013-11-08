@@ -1,4 +1,6 @@
 from django.contrib.gis.db import models
+from django.core.urlresolvers import reverse
+from django.template.defaultfilters import slugify
 
 # Create your models here.
 
@@ -20,6 +22,10 @@ class Hike(models.Model):
 
     objects = models.GeoManager()
 
+    def get_absolute_url(self):
+        slug = slugify(self.name)
+        url = reverse('hike-detail', kwargs={'hike_id': self.id, 'slug': slug})
+        return url
+
     def __unicode__(self):
         return self.name
-

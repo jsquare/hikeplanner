@@ -1,4 +1,4 @@
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
 from hikes.models import Hike
 from django.shortcuts import render_to_response
 from django.contrib.gis import forms
@@ -42,13 +42,28 @@ def results(request):
     hike_list = Hike.objects.filter(days__gte=min_days, days__lte=max_days)
     
     context = {
-        'hike_list' : hike_list
+        'hike_list' : hike_list,
+        'page_title' : 'Hike Results'
     }
 
     hike_str = "Here are all the hikes within your limits: {}".format([hike.__unicode__() for hike in hike_list])
     
     return render_to_response('results.html', context)
 
+def hike_detail(request, hike_id, slug=''):
+    '''
+    The general information page about a hike.
+    @param slug: optional, ignored (allows StackOverflow-style URL)
+    '''
+    try:
+        hike = Hike.objects.get(id=hike_id)
+    except Hike.DoesNotExist:
+        return HttpResponseNotFound() # TODO
 
+    context = {
+        'hike': hike,
+        'page_title': hike.name,
+    }
+    return render_to_response('hike_detail.html', context)
 
 

@@ -1,10 +1,11 @@
-<html>
-Here are all your matching hikes:
+{% extends 'site_base.html' %}
+{% block content %}
+<h2>Recommended hikes:</h2>
 
-<ul>
 {% for hike in hike_list %}
-    <li>{{ hike.name }}</li>
+    <div class="hike-result">
+        <a href="{{ hike.get_absolute_url }}">{{ hike.name }}</a>: {{ hike.get_difficulty_display }}; {{ hike.days }} days
+    </div>
 {% endfor %}
-</ul>
 
-</html>
+{% endblock %}

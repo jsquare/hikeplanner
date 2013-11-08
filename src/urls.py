@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from hikes.views import home, results
+from hikes.views import home, results, hike_detail
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -9,6 +9,8 @@ urlpatterns = patterns('',
     # Examples:
     url(r'^$', home, name='home'),
     url(r'^results/$', results, name='results'),
+    url(r'^hike/(?P<hike_id>\d+)/$', hike_detail, name='hike-detail'),
+    url(r'^hike/(?P<hike_id>\d+)/(?P<slug>[-\w]+)/$', hike_detail, name='hike-detail'),
     # url(r'^hikeplanner/', include('hikeplanner.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
