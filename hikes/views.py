@@ -11,8 +11,8 @@ from django.contrib.gis.geos import fromstr, Point
 
 class SearchForm(forms.Form):
     start_location =  forms.CharField()
-    start_latitude = forms.FloatField()
-    start_longitude = forms.FloatField()
+    start_latitude = forms.FloatField(widget=forms.HiddenInput())
+    start_longitude = forms.FloatField(widget=forms.HiddenInput())
     radius = forms.IntegerField(label='How far away?')
     min_days = forms.IntegerField(widget=forms.HiddenInput())
     max_days = forms.IntegerField(widget=forms.HiddenInput())

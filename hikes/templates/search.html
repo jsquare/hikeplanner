@@ -15,9 +15,11 @@ function geocodeAddress(){
             latlng = results[0].geometry.location;
             $('#id_start_latitude').val(latlng.lat());
             $('#id_start_longitude').val(latlng.lng());
+            $('#search_form').data("geocodeset", true).submit();
         } else {
             alert('Geocode was not successful for the following reason: ' + status);
         }
+
     });
 }
 
@@ -81,9 +83,21 @@ function set_up_sliders(){
 
 window.onload = function(){
     geocoder = new google.maps.Geocoder();
+<<<<<<< HEAD
     $('#id_start_location').blur(geocodeAddress);
     $('#search_form').submit(geocodeAddress);
     set_up_sliders();
+=======
+    // $('#id_start_location').blur(geocodeAddress);
+
+    // Delay submit until geocode call has completed
+    $('#search_form').submit(function(event){
+        if(!$(this).data("geocodeset")){
+            geocodeAddress();
+            return false;
+        }
+    })
+>>>>>>> 29c998deb783572af6a04beb3f2cc68011050f27
 }
 
 </script>
