@@ -13,9 +13,9 @@ class SearchForm(forms.Form):
     start_location =  forms.CharField()
     start_latitude = forms.FloatField()
     start_longitude = forms.FloatField()
-    radius = forms.IntegerField()
-    min_days = forms.IntegerField()
-    max_days = forms.IntegerField()
+    radius = forms.IntegerField(label='How far away?')
+    min_days = forms.IntegerField(widget=forms.HiddenInput())
+    max_days = forms.IntegerField(widget=forms.HiddenInput())
 
 def home(request):
     if request.GET:
