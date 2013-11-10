@@ -26,6 +26,7 @@ Install git and use it to checkout the hikeplanner code
 for us, PostGIS 2.0 did not install properly using just apt-get. To properly install PostGIS 2.0 we needed to add this repository:
 - $ sudo apt-add-repository ppa:ubuntugis/ppa
 - $ sudo apt-get update
+
 in the hikeplanner/ repository root:
 - $ cat requirements.system | xargs sudo apt-get -y install
 
