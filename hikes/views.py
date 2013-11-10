@@ -10,6 +10,7 @@ from django.contrib.gis.geos import fromstr, Point
 # Create your views here.
 
 class SearchForm(forms.Form):
+    start_location =  forms.CharField()
     start_latitude = forms.FloatField()
     start_longitude = forms.FloatField()
     radius = forms.IntegerField()
@@ -17,10 +18,6 @@ class SearchForm(forms.Form):
     max_days = forms.IntegerField()
 
 def home(request):
-    hike_list = Hike.objects.all()
-
-    hike_str = "Here are all the hikes: {}".format([hike.__unicode__() for hike in hike_list])
-
     if request.GET:
         form = SearchForm(request.GET)
     else:  

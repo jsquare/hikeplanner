@@ -1,6 +1,36 @@
 {% extends 'site_base.html' %}
+{% block extra-head %}
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+<script>
+var geocoder;
+
+function geocodeAddress(){
+    // Geocodes the location input and sets the lat and long fields
+
+    var address, latlng;
+
+    address  = $('#id_start_location').val()
+    geocoder.geocode( {'address': address}, function(results, status){
+        if (status == google.maps.GeocoderStatus.OK) {
+            latlng = results[0].geometry.location;
+            $('#id_start_latitude').val(latlng.lat());
+            $('#id_start_longitude').val(latlng.lng());
+        } else {
+            alert('Geocode was not successful for the following reason: ' + status);
+        }
+    });
+}
+
+window.onload = function(){
+    geocoder = new google.maps.Geocoder();
+    $('#id_start_location').blur(geocodeAddress);
+    $('#search_form').submit(geocodeAddress);
+}
+
+</script>
+{% endblock %}
 {% block content %}
-<form action="{% url 'results' %}">
+<form id = "search_form" action="{% url 'results' %}">
 {{ form.as_ul }}
 <input type="submit">
 </form>
