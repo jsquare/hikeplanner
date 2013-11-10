@@ -4,10 +4,15 @@ from django.shortcuts import render_to_response
 from django.contrib.gis import forms
 from django.core.urlresolvers import reverse
 from urllib import urlencode
+from django.contrib.gis.measure import D
+from django.contrib.gis.geos import fromstr, Point
 
 # Create your views here.
 
 class SearchForm(forms.Form):
+    start_latitude = forms.FloatField()
+    start_longitude = forms.FloatField()
+    radius = forms.IntegerField()
     min_days = forms.IntegerField()
     max_days = forms.IntegerField()
 
@@ -38,8 +43,13 @@ def results(request):
     # Request hikes from db within min and max day limits
     min_days = form.cleaned_data['min_days']
     max_days = form.cleaned_data['max_days']
+    radius = form.cleaned_data['radius']
+    start_latitude = form.cleaned_data['start_latitude']
+    start_longitude = form.cleaned_data['start_longitude']
 
-    hike_list = Hike.objects.filter(days__gte=min_days, days__lte=max_days)
+    start_location = Point(start_longitude,start_latitude)
+
+    hike_list = Hike.objects.filter(days__gte=min_days, days__lte=max_days,location__distance_lt=(start_location, D(km=radius)))
     
     context = {
         'hike_list' : hike_list,
