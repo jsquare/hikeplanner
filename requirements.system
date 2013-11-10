@@ -1,0 +1,9 @@
+binutils
+libproj-dev
+gdal-bin
+python-software-properties
+postgresql-9.1
+postgresql-9.1-postgis
+postgresql-server-dev-9.1
+python-psycopg2
+python-pip
