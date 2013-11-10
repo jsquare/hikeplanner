@@ -22,7 +22,7 @@ Install git and use it to checkout the hikeplanner code
 - $ sudo apt-get install git-core
 - $ git clone https://github.com/jsquare/hikeplanner
 
-#### Install system dependencies (GDAL, GEOS, PROJ.4,, PostgreSQL, PostGIS)
+#### Install system dependencies (GDAL, GEOS, PROJ.4, PostgreSQL, PostGIS)
 for us, PostGIS 2.0 did not install properly using just apt-get. To properly install PostGIS 2.0 we needed to add this repository:
 - $ sudo apt-add-repository ppa:ubuntugis/ppa
 - $ sudo apt-get update
@@ -63,7 +63,8 @@ Windows
 After about five hours of trying to get the various libraries installed and working together on Windows, we finally figured out a reliable solution:
 
 1. Install virtualbox on your windows machine and boot it into Ubuntu: [VirtualBox + Ubuntu](http://www.psychocats.net/ubuntu/virtualbox). 
-- I got VirtualBox from [here](http://www.oracle.com/technetwork/server-storage/virtualbox/downloads/index.html#vbox)
-- I got Ubuntu 12.04 .iso from [here](http://www.ubuntu.com/download/desktop)
+
+    - I got VirtualBox from [here](http://www.oracle.com/technetwork/server-storage/virtualbox/downloads/index.html#vbox)
+    - I got Ubuntu 12.04 .iso from [here](http://www.ubuntu.com/download/desktop)
 
 2. Follow Ubuntu instructions above. 
