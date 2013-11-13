@@ -53,12 +53,14 @@ function set_up_sliders(){
 
     // Set up length slider connected to length min/max inputs
     var initial_min_length = $( "#id_min_length" ).val(),
-        initial_max_length = $( "#id_max_length" ).val();
+        initial_max_length = $( "#id_max_length" ).val(),
+        length_labels = ["<1 hr","Half day","Full day","Overnight","3+ days"];
 
-    $( "#length_slider" ).slider({
+    $( "#length_slider" ).labeledslider({
         range: true,
         min: 0,
-        max: 100,
+        max: length_labels.length-1,
+        tickLabels: length_labels,
         values: [ initial_min_length, initial_max_length ],
         slide: function( event, ui ) {
             update_slider_inputs(ui.values,"#id_min_length","#id_max_length");
@@ -67,13 +69,14 @@ function set_up_sliders(){
 
     // Set up radius slider connected to length min/max inputs
     var initial_min_radius = $( "#id_min_radius" ).val(),
-        initial_max_radius = $( "#id_max_radius" ).val();
+        initial_max_radius = $( "#id_max_radius" ).val(),
+        radius_labels = ["10","30","100","300"]; //TODO: Think about a better way to make sure these align with the values passed to the form, even when we change them?
 
     $( "#radius_slider" ).slider({
         range: true,
-        min: 1,
-        max: 1000,
-        step: 100,
+        min: 0,
+        max: radius_labels.length-1,
+        tickLabels: radius_labels,
         values: [ initial_min_radius, initial_max_radius ],
         slide: function( event, ui ) {
             update_slider_inputs(ui.values,"#id_min_radius","#id_max_radius");
@@ -82,12 +85,15 @@ function set_up_sliders(){
 
     // Set up terrain slider connected to terrain min/max inputs
     var initial_min_terrain = $( "#id_min_terrain" ).val(),
-        initial_max_terrain = $( "#id_max_terrain" ).val();
+        initial_max_terrain = $( "#id_max_terrain" ).val(),
+        terrain_labels = ["Easy","Medium","Rough","Technical"];
 
-    $( "#terrain_slider" ).slider({
+    $( "#terrain_slider" ).labeledslider({
         range: true,
-        min: 1,
-        max: 10,
+        min: 0,
+        max: terrain_labels.length-1,
+        tickInterval: 1,
+        tickLabels: terrain_labels,
         values: [ initial_min_terrain, initial_max_terrain ],
         slide: function( event, ui ) {
             update_slider_inputs(ui.values,"#id_min_terrain","#id_max_terrain");
@@ -95,9 +101,9 @@ function set_up_sliders(){
     });
 
     // Initialize
-    update_slider_inputs([$( "#length_slider" ).slider("option", "values")],"#id_min_length","#id_max_length");
-    update_slider_inputs($( "#terrain_slider" ).slider("option", "values"),"#id_min_terrain","#id_max_terrain");
-    update_slider_inputs($( "#radius_slider" ).slider("option", "values"),"#id_min_radius","#id_max_radius");
+    //update_slider_inputs($( "#length_slider" ).labeledslider("option", "values"),"#id_min_length","#id_max_length");
+    //update_slider_inputs($( "#terrain_slider" ).labeledslider("option", "values"),"#id_min_terrain","#id_max_terrain");
+    //update_slider_inputs($( "#radius_slider" ).labeledslider("option", "values"),"#id_min_radius","#id_max_radius");
 
 }
 
