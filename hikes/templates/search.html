@@ -23,33 +23,21 @@ function geocodeAddress(){
     });
 }
 
-function update_length_slider_summary(slider_values){
-    // Updates length inputs and summary according to the value of the length slider
-    var summary,
-        min = slider_values[ 0 ],
+function update_slider_inputs(slider_values, min_input_id, max_input_id){
+    // Updates form inputs associated with slider
+    var min = slider_values[ 0 ],
         max = slider_values[ 1 ];
 
-    $( "#id_min_days" ).val( min );
-    $( "#id_max_days" ).val( max );
+    $( min_input_id ).val( min );
+    $( max_input_id ).val( max );
 
-    if ( min == max ){
-        summary = min;
-        if ( min == 1 ){
-            summary += " day"
-        } else {
-            summary += " days"
-        }
-    } else {
-        summary = min + " to " + max + " days"
-    }
-    $( "#length_summary" ).text( summary );
 }
 
 function set_up_sliders(){
     // Set up radius slider connected to radius input
-    var select = $( "#id_radius" );
+    /* var select = $( "#id_radius" );
     var slider = $( "<div id='radius_slider'></div>" ).insertAfter( select ).slider({
-        min: 1,
+        min: 0,
         max: 4000,
         step: 50,
         range: "min",
@@ -61,24 +49,56 @@ function set_up_sliders(){
     $( "#id_radius" ).change(function() {
         slider.slider( "value", this.val() );
     });
-    $( "<span>kilometers</span>" ).insertAfter(select);
+    $( "<span>kilometers</span>" ).insertAfter(select);*/
 
     // Set up length slider connected to length min/max inputs
-    var initial_min = $( "#id_min_days" ).val(),
-        initial_max = $( "#id_max_days" ).val();
+    var initial_min_length = $( "#id_min_length" ).val(),
+        initial_max_length = $( "#id_max_length" ).val();
 
     $( "#length_slider" ).slider({
         range: true,
+        min: 0,
+        max: 100,
+        values: [ initial_min_length, initial_max_length ],
+        slide: function( event, ui ) {
+            update_slider_inputs(ui.values,"#id_min_length","#id_max_length");
+        }
+    });
+
+    // Set up radius slider connected to length min/max inputs
+    var initial_min_radius = $( "#id_min_radius" ).val(),
+        initial_max_radius = $( "#id_max_radius" ).val();
+
+    $( "#radius_slider" ).slider({
+        range: true,
+        min: 1,
+        max: 1000,
+        step: 100,
+        values: [ initial_min_radius, initial_max_radius ],
+        slide: function( event, ui ) {
+            update_slider_inputs(ui.values,"#id_min_radius","#id_max_radius");
+        }
+    });
+
+    // Set up terrain slider connected to terrain min/max inputs
+    var initial_min_terrain = $( "#id_min_terrain" ).val(),
+        initial_max_terrain = $( "#id_max_terrain" ).val();
+
+    $( "#terrain_slider" ).slider({
+        range: true,
         min: 1,
         max: 10,
-        values: [ initial_min, initial_max ],
+        values: [ initial_min_terrain, initial_max_terrain ],
         slide: function( event, ui ) {
-            update_length_slider_summary(ui.values);
+            update_slider_inputs(ui.values,"#id_min_terrain","#id_max_terrain");
         }
     });
 
     // Initialize
-    update_length_slider_summary($( "#length_slider" ).slider("option", "values"));
+    update_slider_inputs([$( "#length_slider" ).slider("option", "values")],"#id_min_length","#id_max_length");
+    update_slider_inputs($( "#terrain_slider" ).slider("option", "values"),"#id_min_terrain","#id_max_terrain");
+    update_slider_inputs($( "#radius_slider" ).slider("option", "values"),"#id_min_radius","#id_max_radius");
+
 }
 
 window.onload = function(){
@@ -104,9 +124,18 @@ window.onload = function(){
 <p>
     <label for="length_slider">How long of a hike?</label>
     <div id="length_slider_container">
-        <div id="length_summary" class="data-display"> </div>
         <div id="length_slider"> </div>
         <div id="length_slider_legend"> </div>{# TODO(#1): currently unused; probably do something like http://jsbin.com/ijekix/3/edit #}
+    </div>
+    <label for="radius_slider">How far away?</label>
+    <div id="radius_slider_container">
+        <div id="radius_slider"> </div>
+        <div id="radius_slider_legend"> </div>{# TODO(#1): currently unused; probably do something like http://jsbin.com/ijekix/3/edit #}
+    </div>   
+    <label for="terrain_slider">How hard of a hike?</label>
+    <div id="terrain_slider_container">
+        <div id="terrain_slider"> </div>
+        <div id="terrain_slider_legend"> </div>{# TODO(#1): currently unused; probably do something like http://jsbin.com/ijekix/3/edit #}
     </div>
 </p>
 <input type="submit">

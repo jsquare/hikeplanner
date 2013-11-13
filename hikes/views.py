@@ -13,9 +13,12 @@ class SearchForm(forms.Form):
     start_location =  forms.CharField()
     start_latitude = forms.FloatField(widget=forms.HiddenInput())
     start_longitude = forms.FloatField(widget=forms.HiddenInput())
-    radius = forms.IntegerField(label='How far away?')
-    min_days = forms.IntegerField(widget=forms.HiddenInput())
-    max_days = forms.IntegerField(widget=forms.HiddenInput())
+    min_radius = forms.IntegerField(widget=forms.HiddenInput())
+    max_radius = forms.IntegerField(widget=forms.HiddenInput())
+    min_length = forms.IntegerField(widget=forms.HiddenInput())
+    max_length = forms.IntegerField(widget=forms.HiddenInput())
+    min_terrain = forms.IntegerField(widget=forms.HiddenInput())
+    max_terrain = forms.IntegerField(widget=forms.HiddenInput())
 
 def home(request):
     if request.GET:
@@ -38,9 +41,9 @@ def results(request):
         return HttpResponseRedirect('%s?%s' % (url,params))
 
     # Request hikes from db within min and max day limits
-    min_days = form.cleaned_data['min_days']
-    max_days = form.cleaned_data['max_days']
-    radius = form.cleaned_data['radius']
+    min_days = form.cleaned_data['min_length']  # TODO: change db fields to be min/max length instead of days. TODO: convert 'lengths' ==> days
+    max_days = form.cleaned_data['max_length']
+    radius = form.cleaned_data['max_radius']    # TODO: support min radius
     start_latitude = form.cleaned_data['start_latitude']
     start_longitude = form.cleaned_data['start_longitude']
 
