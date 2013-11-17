@@ -34,6 +34,7 @@ function update_slider_inputs(slider_values, min_input_id, max_input_id){
 }
 
 function set_up_sliders(){
+    // Commented out this code in case we want to try the other way of init'ing a slider
     // Set up radius slider connected to radius input
     /* var select = $( "#id_radius" );
     var slider = $( "<div id='radius_slider'></div>" ).insertAfter( select ).slider({
@@ -72,7 +73,7 @@ function set_up_sliders(){
         initial_max_radius = $( "#id_max_radius" ).val(),
         radius_labels = ["10","30","100","300"]; //TODO: Think about a better way to make sure these align with the values passed to the form, even when we change them?
 
-    $( "#radius_slider" ).slider({
+    $( "#radius_slider" ).labeledslider({
         range: true,
         min: 0,
         max: radius_labels.length-1,
@@ -129,20 +130,11 @@ window.onload = function(){
 {{ form.as_p }}
 <p>
     <label for="length_slider">How long of a hike?</label>
-    <div id="length_slider_container">
-        <div id="length_slider"> </div>
-        <div id="length_slider_legend"> </div>{# TODO(#1): currently unused; probably do something like http://jsbin.com/ijekix/3/edit #}
-    </div>
+    <div id="length_slider"> </div>
     <label for="radius_slider">How far away?</label>
-    <div id="radius_slider_container">
-        <div id="radius_slider"> </div>
-        <div id="radius_slider_legend"> </div>{# TODO(#1): currently unused; probably do something like http://jsbin.com/ijekix/3/edit #}
-    </div>   
+    <div id="radius_slider"> </div>
     <label for="terrain_slider">How hard of a hike?</label>
-    <div id="terrain_slider_container">
-        <div id="terrain_slider"> </div>
-        <div id="terrain_slider_legend"> </div>{# TODO(#1): currently unused; probably do something like http://jsbin.com/ijekix/3/edit #}
-    </div>
+    <div id="terrain_slider"> </div>
 </p>
 <input type="submit">
 </form>
