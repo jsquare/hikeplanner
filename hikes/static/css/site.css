@@ -29,10 +29,12 @@ h1, h2 {
 }
 
 #content {
-    width: 600px;
+    width: 500px;
     margin-left: auto;
     margin-right: auto;
     background-color: white;
+    padding-left: 40px;
+    padding-right: 60px;
 }
 
 .hike-result {
