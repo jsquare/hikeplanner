@@ -35,6 +35,16 @@ h1, h2 {
     background-color: white;
 }
 
+div .slider-padding, div .match-slider-padding{
+    padding-left: 60px;
+    padding-right: 60px;
+}
+
+div .slider-margin{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 .hike-result {
     padding: 10px;
     border-top: 1px dashed green;

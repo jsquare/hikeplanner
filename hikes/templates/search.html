@@ -34,27 +34,13 @@ function update_slider_inputs(slider_values, min_input_id, max_input_id){
 }
 
 function set_up_sliders(){
-    // Set up radius slider connected to radius input
-    /* var select = $( "#id_radius" );
-    var slider = $( "<div id='radius_slider'></div>" ).insertAfter( select ).slider({
-        min: 0,
-        max: 4000,
-        step: 50,
-        range: "min",
-        value: select.val(),
-        slide: function( event, ui ) {
-            select.val(ui.value);
-        }
-    });
-    $( "#id_radius" ).change(function() {
-        slider.slider( "value", this.val() );
-    });
-    $( "<span>kilometers</span>" ).insertAfter(select);*/
+    // TODO: think about how to get previous slider selections if the user returns to the search page
 
     // Set up length slider connected to length min/max inputs
-    var initial_min_length = $( "#id_min_length" ).val(),
-        initial_max_length = $( "#id_max_length" ).val(),
-        length_labels = ["<1 hr","Half day","Full day","Overnight","3+ days"];
+    var initial_min_length = $("#id_min_length").val(),
+        initial_max_length = $("#id_max_length").val(),
+        length_labels = ["<2 hrs","Half day","Full day","2 days","3+ days"];
+        // TODO: Properly associate these with the database hike lengths
 
     $( "#length_slider" ).labeledslider({
         range: true,
@@ -67,12 +53,13 @@ function set_up_sliders(){
         }
     });
 
-    // Set up radius slider connected to length min/max inputs
-    var initial_min_radius = $( "#id_min_radius" ).val(),
-        initial_max_radius = $( "#id_max_radius" ).val(),
-        radius_labels = ["10","30","100","300"]; //TODO: Think about a better way to make sure these align with the values passed to the form, even when we change them?
+    // Set up radius slider connected to radius min/max inputs
+    var initial_min_radius = $("#id_min_radius").val(),
+        initial_max_radius = $("#id_max_radius").val(),
+        radius_labels = ["0","10","30","100","300"]; 
+        // TODO: Think about a better way to make sure these labels align with the values passed to the form, even when we change them?
 
-    $( "#radius_slider" ).slider({
+    $( "#radius_slider" ).labeledslider({
         range: true,
         min: 0,
         max: radius_labels.length-1,
@@ -84,8 +71,8 @@ function set_up_sliders(){
     });
 
     // Set up terrain slider connected to terrain min/max inputs
-    var initial_min_terrain = $( "#id_min_terrain" ).val(),
-        initial_max_terrain = $( "#id_max_terrain" ).val(),
+    var initial_min_terrain = $("#id_min_terrain").val(),
+        initial_max_terrain = $("#id_max_terrain").val(),
         terrain_labels = ["Easy","Medium","Rough","Technical"];
 
     $( "#terrain_slider" ).labeledslider({
@@ -99,11 +86,6 @@ function set_up_sliders(){
             update_slider_inputs(ui.values,"#id_min_terrain","#id_max_terrain");
         }
     });
-
-    // Initialize
-    //update_slider_inputs($( "#length_slider" ).labeledslider("option", "values"),"#id_min_length","#id_max_length");
-    //update_slider_inputs($( "#terrain_slider" ).labeledslider("option", "values"),"#id_min_terrain","#id_max_terrain");
-    //update_slider_inputs($( "#radius_slider" ).labeledslider("option", "values"),"#id_min_radius","#id_max_radius");
 
 }
 
@@ -126,24 +108,21 @@ window.onload = function(){
 {% endblock %}
 {% block content %}
 <form id="search_form" action="{% url 'results' %}">
-{{ form.as_p }}
-<p>
-    <label for="length_slider">How long of a hike?</label>
-    <div id="length_slider_container">
-        <div id="length_slider"> </div>
-        <div id="length_slider_legend"> </div>{# TODO(#1): currently unused; probably do something like http://jsbin.com/ijekix/3/edit #}
+    <div class="match-slider-padding">
+        {{ form.as_p }}
     </div>
-    <label for="radius_slider">How far away?</label>
-    <div id="radius_slider_container">
-        <div id="radius_slider"> </div>
-        <div id="radius_slider_legend"> </div>{# TODO(#1): currently unused; probably do something like http://jsbin.com/ijekix/3/edit #}
-    </div>   
-    <label for="terrain_slider">How hard of a hike?</label>
-    <div id="terrain_slider_container">
-        <div id="terrain_slider"> </div>
-        <div id="terrain_slider_legend"> </div>{# TODO(#1): currently unused; probably do something like http://jsbin.com/ijekix/3/edit #}
+    <div class="slider-padding">
+        <label for="length_slider">How long of a hike?</label>
+        <div id="length_slider" class="slider-margin"> </div>
     </div>
-</p>
+    <div class="slider-padding">
+        <label for="radius_slider">How far away?</label>
+        <div id="radius_slider" class="slider-margin"> </div>
+    </div>
+    <div class="slider-padding">
+        <label for="terrain_slider">How hard of a hike?</label>
+        <div id="terrain_slider" class="slider-margin"> </div>
+    </div>
 <input type="submit">
 </form>
 {% endblock %}

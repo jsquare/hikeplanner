@@ -629,6 +629,7 @@ button.ui-button::-moz-focus-inner {
 	display: block;
 	border: 0;
 	background-position: 0 0;
+    background: #459e00;
 }
 
 /* For IE8 - See #6727 */
