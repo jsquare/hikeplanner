@@ -13,12 +13,12 @@ class SearchForm(forms.Form):
     start_location =  forms.CharField()
     start_latitude = forms.FloatField(widget=forms.HiddenInput())
     start_longitude = forms.FloatField(widget=forms.HiddenInput())
-    min_radius = forms.IntegerField(widget=forms.HiddenInput())
-    max_radius = forms.IntegerField(widget=forms.HiddenInput())
-    min_length = forms.IntegerField(widget=forms.HiddenInput())
-    max_length = forms.IntegerField(widget=forms.HiddenInput())
-    min_terrain = forms.IntegerField(widget=forms.HiddenInput())
-    max_terrain = forms.IntegerField(widget=forms.HiddenInput())
+    min_radius = forms.IntegerField(widget=forms.HiddenInput(),initial=0)
+    max_radius = forms.IntegerField(widget=forms.HiddenInput(),initial=1)
+    min_length = forms.IntegerField(widget=forms.HiddenInput(),initial=1)
+    max_length = forms.IntegerField(widget=forms.HiddenInput(),initial=2)
+    min_terrain = forms.IntegerField(widget=forms.HiddenInput(),initial=0)
+    max_terrain = forms.IntegerField(widget=forms.HiddenInput(), initial=1)
 
 def home(request):
     if request.GET:
