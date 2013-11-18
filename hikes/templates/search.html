@@ -54,7 +54,7 @@ function set_up_sliders(){
 
     // Set up radius slider connected to radius min/max inputs
     var initial_radii = [0,1],
-        radius_labels = ["10","30","100","300"]; 
+        radius_labels = ["0","10","30","100","300"]; 
         // TODO: Think about a better way to make sure these labels align with the values passed to the form, even when we change them?
 
     $( "#radius_slider" ).labeledslider({
@@ -110,15 +110,21 @@ window.onload = function(){
 {% endblock %}
 {% block content %}
 <form id="search_form" action="{% url 'results' %}">
-{{ form.as_p }}
-<p>
-    <label for="length_slider">How long of a hike?</label>
-    <div id="length_slider"> </div>
-    <label for="radius_slider">How far away?</label>
-    <div id="radius_slider"> </div>
-    <label for="terrain_slider">How hard of a hike?</label>
-    <div id="terrain_slider"> </div>
-</p>
+    <div class="match-slider-padding">
+        {{ form.as_p }}
+    </div>
+    <div class="slider-padding">
+        <label for="length_slider">How long of a hike?</label>
+        <div id="length_slider" class="slider-margin"> </div>
+    </div>
+    <div class="slider-padding">
+        <label for="radius_slider">How far away?</label>
+        <div id="radius_slider" class="slider-margin"> </div>
+    </div>
+    <div class="slider-padding">
+        <label for="terrain_slider">How hard of a hike?</label>
+        <div id="terrain_slider" class="slider-margin"> </div>
+    </div>
 <input type="submit">
 </form>
 {% endblock %}
