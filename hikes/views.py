@@ -1,11 +1,14 @@
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
 from hikes.models import Hike
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, render
 from django.contrib.gis import forms
+from django.contrib import auth
+from django.contrib.auth.forms import UserCreationForm
 from django.core.urlresolvers import reverse
 from urllib import urlencode
 from django.contrib.gis.measure import D
 from django.contrib.gis.geos import fromstr, Point
+from django.template import RequestContext
 
 # Create your views here.
 
@@ -30,7 +33,7 @@ def home(request):
         'form' : form
     }
 
-    return render_to_response('search.html', context)
+    return render_to_response('search.html', context_instance = RequestContext(request))
 
 def results(request):
     form = SearchForm(request.GET)
@@ -76,4 +79,22 @@ def hike_detail(request, hike_id, slug=''):
     }
     return render_to_response('hike_detail.html', context)
 
+#Gets called when a user submits login info. Authenticates and redirects user.
+def login(request):
+    username = request.POST.get('username', '')
+    password = request.POST.get('password', '')
+    user = auth.authenticate(username=username, password=password)
+    if user is not None and user.is_active:
+        #Verified corect password, user is marked as active, so log them in
+        auth.login(request, user)
+        #Redirect to success page
+        return HttpResponseRedirect("/account/loggedin")
+    else:
+        #Show error page
+        return HttpResponseRedirect("/account/invalid")
 
+#Gets called when user clicks on logout
+def logout(request):
+    auth.logout(request)
+    #REdirect to success page
+    return HttpResponseRedirect("/")
