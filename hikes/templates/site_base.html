@@ -14,11 +14,11 @@
 </head>
 <body>
 <div id='header'>
-    <h1>Hike Planner</h1>
+    <h1><a href="/">Hike Planner</a></h1>
     {% if user.is_authenticated %}
         <p>Welcome, {{ user.username }}. <a href="/accounts/logout/">Logout</a></p>
     {% else %}
-        <p><a href="/accounts/login/">Log in</a></p>
+        <p><a href="/accounts/login/">Log in</a> | <a href="/accounts/register/">Register</a></p>
     {% endif %}
 </div>
 <div id='content'>

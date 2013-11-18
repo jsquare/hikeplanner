@@ -9,6 +9,7 @@ from urllib import urlencode
 from django.contrib.gis.measure import D
 from django.contrib.gis.geos import fromstr, Point
 from django.template import RequestContext
+from django.core.context_processors import csrf
 
 # Create your views here.
 
@@ -98,3 +99,16 @@ def logout(request):
     auth.logout(request)
     #REdirect to success page
     return HttpResponseRedirect("/")
+
+def register(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect("/")
+    else:
+        args = {}
+        args.update(csrf(request))
+        args['form'] = UserCreationForm()
+        return render_to_response('register.html', args)    
+
