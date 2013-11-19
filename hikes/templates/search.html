@@ -23,6 +23,14 @@ function geocodeAddress(){
     });
 }
 
+function geolocate_start_address(){
+    // Uses freegeoip.net to geolocate a default start address based on host IP
+    // Note: added '?callback=?' to url so jQuery would correctly circumvent same origin policy 
+    $.getJSON('http://freegeoip.net/json/?callback=?', function(location){
+        $('#id_start_location').val(location.city);
+    })
+}
+
 function update_slider_inputs(slider_values, min_input_id, max_input_id){
     // Updates form inputs associated with slider
     var min = slider_values[ 0 ],
@@ -91,6 +99,7 @@ function set_up_sliders(){
 
 window.onload = function(){
     geocoder = new google.maps.Geocoder();
+    geolocate_start_address();
     set_up_sliders();
 
     // $('#id_start_location').blur(geocodeAddress);
